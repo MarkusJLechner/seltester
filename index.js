@@ -1,7 +1,7 @@
 import chrome from 'selenium-webdriver/chrome.js'
 import { Builder, By, until } from 'selenium-webdriver'
-import { describe, it, beforeEach, afterEach } from 'mocha'
 import chromedriver from 'chromedriver'
+import mocha from 'mocha'
 
 const headless = false
 

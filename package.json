@@ -18,6 +18,6 @@
   },
   "scripts": {
     "lint": "eslint --ext .js --ignore-path .gitignore .",
-    "test": "index.js"
+    "test": "mocha index.js"
   }
 }
