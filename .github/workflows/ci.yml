@@ -19,7 +19,7 @@ jobs:
       - name: Yarn install cache
         # You may pin to the exact commit or the version.
         # uses: c-hive/gha-yarn-cache@1188bbd5a9af66e263de707cf9e97b7b7c942969
-        uses: c-hive/gha-yarn-cache@v1
+        uses: c-hive/gha-yarn-cache@v2
 
       - run: yarn install
 
