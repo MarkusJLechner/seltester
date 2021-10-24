@@ -12,36 +12,29 @@ jobs:
     #  image: node:14.18.1
     #  options: --network-alias testHost
 
-    env:
-      NODE_ENV: test
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
+    #env:
+    #  NODE_ENV: test
+    #  SELENIUM_HUB_HOST: hub
+    #  TEST_HOST: testHost
 
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-chrome:4.0.0-20211013
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
+    #services:
+    #  hub:
+    #    image: selenium/hub:3.141.59-gold
+    #  firefox:
+    #    image: selenium/node-chrome:4.0.0-20211013
+    #    env:
+    #      HUB_HOST: hub
+    #      HUB_PORT: 4444
 
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      
+      - uses: nanasess/setup-chromedriver@master
+      
         with:
-          node-version: 14.18.1
-        
-      - name: Checkout
-        uses: actions/checkout@v1.2.0
-        
-      - uses: c-hive/gha-yarn-cache@v1
-
-      - name: Install JS dependencies
-        run: yarn install
-        
-      - name: Lint
-        run: yarn lint
-        
-      - name: Test
-        run: yarn test
+          # Optional: do not specify to match Chrome's version
+          chromedriver-version: '95.0.4638.54'
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
