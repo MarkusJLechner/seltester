@@ -32,14 +32,6 @@ jobs:
           name: test-results
           path: test-results.json
 
-      - uses: dorny/test-reporter@v1
-        with:
-          artifact: test-results            # artifact name
-          name: Mocha Tests                 # Name of the check run which will be created
-          path: '*.json'                    # Path to test results (inside artifact .zip)
-          reporter: mocha-json              # Format of test results
-
-
   #e2e-safari:
   #  runs-on: macos-latest
   #  steps:
