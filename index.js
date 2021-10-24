@@ -3,7 +3,10 @@ import { Builder, By, until } from 'selenium-webdriver'
 import chromedriver from 'chromedriver'
 import mocha from 'mocha'
 
-const headless = false
+const ci = process.env.CI || false
+console.log('Is CI: ' + ci)
+
+const headless = ci
 
 describe('Default Suite', function () {
   this.timeout(30000)
