@@ -4,7 +4,7 @@ import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '@root/js
 import { gotoBackoffice } from '@root/js/service/hellocash.js'
 import Mocha from 'mocha'
 
-describe('Default Suite', function () {
+describe('cash-register/invoice', function () {
   this.timeout(30000)
   let driver
 
@@ -17,7 +17,7 @@ describe('Default Suite', function () {
     await driver.quit()
   })
 
-  it('Create invoice', async function () {
+  it('creates an invoice', async function () {
     // Test name: ddd
     // Step # | name | target | value
     // 2 | setWindowSize | 1452x1050 |
