@@ -4,7 +4,9 @@ import chromedriver from 'chromedriver'
 import mocha from 'mocha'
 
 const ci = process.env.CI || false
-console.log('Is CI: ' + ci)
+const browser = process.env.BROWSER || 'chrome'
+
+console.log(`Is CI: ${ci}. Browser env: ${browser}`)
 
 const headless = ci
 
