@@ -19,8 +19,8 @@
   },
   "scripts": {
     "lint": "eslint --ext .js --ignore-path .gitignore .",
-    "test": "mocha index.js --reporter nyan --recursive tests/",
-    "test:hl": "set NODE_HEADLESS=true NODE_PATH=. && mocha --recursive tests/ --reporter nyan",
-    "test:ci": "mocha --recursive tests/ --reporter json > test-results.json"
+    "test": "mocha --reporter nyan --recursive tests/",
+    "test:hl": "set NODE_HEADLESS=true && mocha --recursive tests/ --reporter nyan",
+    "test:ci": "mocha --reporter json > test-results.json --recursive tests/"
   }
 }
