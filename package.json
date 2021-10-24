@@ -18,6 +18,7 @@
   },
   "scripts": {
     "lint": "eslint --ext .js --ignore-path .gitignore .",
-    "test": "mocha index.js"
+    "test": "mocha index.js --reporter nyan",
+    "test:ci": "mocha index.js --reporter json > test-results.json"
   }
 }

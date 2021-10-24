@@ -6,7 +6,7 @@ import mocha from 'mocha'
 const ci = process.env.CI || false
 const browser = process.env.BROWSER || 'chrome'
 
-console.log(`Is CI: ${ci}. Browser env: ${browser}`)
+// console.log(`Is CI: ${ci}. Browser env: ${browser}`)
 
 const headless = ci
 

@@ -1,0 +1,6 @@
+{
+  "jsonReporterOptions": {
+    "output": "xunit-custom.json"
+  },
+  "reporterEnabled": "json, json"
+}
