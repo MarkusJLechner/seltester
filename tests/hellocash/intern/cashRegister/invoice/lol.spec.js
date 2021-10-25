@@ -1,15 +1,15 @@
+import defaultDriver from '../../../../../js/drivers.js'
 import { By } from 'selenium-webdriver'
-import { driver as chromedriver } from '@root/js/drivers/chrome.js'
-import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '@root/js/seleniumUtils.js'
-import { gotoBackoffice } from '@root/js/service/hellocash.js'
-import Mocha from 'mocha'
+import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '../../../../../js/seleniumUtils.js'
+import { gotoBackoffice } from '../../../../../js/service/hellocash.js'
+import { describe, it, after, before } from 'mocha'
 
 describe('cash-register/invoice', function () {
   this.timeout(30000)
   let driver
 
   before(async function () {
-    driver = await chromedriver()
+    driver = await defaultDriver()
     await gotoBackoffice(driver)
   })
 

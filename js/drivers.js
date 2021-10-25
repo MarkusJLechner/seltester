@@ -1,14 +1,19 @@
 import { Builder } from 'selenium-webdriver'
-import chrome from 'selenium-webdriver/chrome.js'
+import seleniumChrome from 'selenium-webdriver/chrome.js'
 import chromedriver from 'chromedriver'
-import { envHeadless } from '../utils.js'
+import { envHeadless } from './utils.js'
 
-export async function driver() {
-  const options = new chrome.Options()
+export default function defaultDriver() {
+  return chrome()
+}
+
+export async function chrome() {
+  const options = new seleniumChrome.Options()
   options.addArguments(
     '--disable-extensions',
     '--window-size=1452,1050',
     '--disable-print-preview',
+    '--ignore-certificate-error',
     //'--no-sandbox',
     //'--disable-gpu',
     //'--enable-logging --v=1',
