@@ -1,18 +1,19 @@
 import { defaultDriver } from '#root/js/drivers.js'
 import { By } from 'selenium-webdriver'
-import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '#root/js/seleniumUtils.js'
+import { findClick, setWindowSize, waitSeconds, waitUntilAppear, waitUntilClickable } from '#root/js/seleniumUtils.js'
 import { gotoBackoffice } from '#root/js/service/hellocash.js'
 import Mocha from 'mocha'
 
 describe('cash-register/invoice', function () {
+  this.timeout(30000)
   let driver
 
-  before(async function () {
+  beforeEach(async function () {
     driver = await defaultDriver()
     await gotoBackoffice(driver)
   })
 
-  after(async function () {
+  afterEach(async function () {
     await (driver && driver.close())
   })
 
@@ -95,5 +96,57 @@ describe('cash-register/invoice', function () {
         By.css('#modal-invoice-success > div > div > div.modal-body.modal-body-full > div > div > div > div > button')
       )
       .click()
+  })
+
+  it('parks and loads and create invoice', async function () {
+    await setWindowSize(driver, { width: 1452, height: 1050 })
+
+    await driver.findElement(By.css('.quick-link-top-left > .text-uppercase')).click()
+
+    await waitUntilAppear(driver, '#tab-articles .product:nth-child(1)')
+
+    await driver.findElement(By.css('#tab-articles .product:nth-child(1)')).click()
+    await driver.findElement(By.css('.btn-park-invoice > img')).click()
+    {
+      const element = await driver.findElement(By.css('.btn-park-invoice > img'))
+      await driver.actions({ bridge: true }).move(element).perform()
+    }
+    {
+      const element = await driver.findElement(By.css('Body'))
+      await driver.actions({ bridge: true }).move(element, 0, 0).perform()
+    }
+    await driver.findElement(By.name('remark')).sendKeys('test')
+    await driver.findElement(By.css('#form-park-invoice .btn-primary > .block')).click()
+    await driver.findElement(By.css('.btn-load-parked-invoice > img')).click()
+    await waitUntilAppear(
+      driver,
+      '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice'
+    )
+    await waitSeconds(driver, 0.5)
+
+    await driver.findElement(By.linkText('Laden')).click()
+    {
+      const element = await driver.findElement(By.css('#tab-articles .hidden-sm'))
+      await driver.actions({ bridge: true }).move(element).perform()
+    }
+    {
+      const element = await driver.findElement(By.css('Body'))
+      await driver.actions({ bridge: true }).move(element, 0, 0).perform()
+    }
+    await driver.findElement(By.css('.btn-invoice')).click()
+    {
+      const element = await driver.findElement(By.css('.btn-invoice'))
+      await driver.actions({ bridge: true }).move(element).perform()
+    }
+    {
+      const element = await driver.findElement(By.css('Body'))
+      await driver.actions({ bridge: true }).move(element, 0, 0).perform()
+    }
+    await driver.findElement(By.css('.text-ellipsis:nth-child(3)')).click()
+    await driver.findElement(By.css('.payment-buttons:nth-child(1) > .btn:nth-child(2)')).click()
+
+    await waitUntilClickable(driver, '#modal-invoice-success .btn:nth-child(5)')
+
+    await driver.findElement(By.css('#modal-invoice-success .btn:nth-child(5)')).click()
   })
 })

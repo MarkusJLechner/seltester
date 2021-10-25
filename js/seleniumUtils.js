@@ -8,6 +8,11 @@ export function waitUntilAppear(driver, selector, time = 10000) {
   return driver.wait(until.elementLocated(By.css(selector)), time)
 }
 
+export function waitUntilClickable(driver, selector, time = 10000) {
+  const element = driver.wait(until.elementLocated(By.css(selector)), time)
+  return driver.wait(until.elementIsVisible(element), time)
+}
+
 export function setWindowSize(driver, { width, height }) {
   return driver.manage().window().setRect({ width, height })
 }

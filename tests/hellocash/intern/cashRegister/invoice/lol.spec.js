@@ -5,14 +5,15 @@ import { gotoBackoffice } from '#root/js/service/hellocash.js'
 import Mocha from 'mocha'
 
 describe('cash-register/invoice', function () {
+  this.timeout(30000)
   let driver
 
-  before(async function () {
+  beforeEach(async function () {
     driver = await defaultDriver()
     await gotoBackoffice(driver)
   })
 
-  after(async function () {
+  afterEach(async function () {
     await (driver && driver.close())
   })
 
