@@ -8,13 +8,13 @@ describe('cash-register/invoice', function () {
   this.timeout(30000)
   let driver
 
-  beforeEach(async function () {
+  before(async function () {
     driver = await chromedriver()
     await gotoBackoffice(driver)
   })
 
-  afterEach(async function () {
-    await driver.quit()
+  after(async function () {
+    await (driver && driver.quit())
   })
 
   it('creates an invoice with custom article', async function () {
