@@ -13,7 +13,7 @@ describe('cash-register/invoice', function () {
   })
 
   after(async function () {
-    await (driver && driver.close())
+    await (driver && driver.close() && driver.quit())
   })
 
   it('creates an invoice with custom article', async function () {

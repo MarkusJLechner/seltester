@@ -17,7 +17,7 @@ describe('cash-register/invoice', function () {
   })
 
   after(async function () {
-    await (driver && driver.close()) // quit
+    await (driver && driver.close() && driver.quit()) // quit
   })
 
   it('creates an invoice', async function () {
