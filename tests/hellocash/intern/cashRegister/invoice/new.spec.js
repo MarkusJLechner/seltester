@@ -122,7 +122,11 @@ describe('cash-register/invoice', function () {
       driver,
       '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice'
     )
-    await waitSeconds(driver, 0.5)
+
+    await waitUntilClickable(
+      driver,
+      '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice'
+    )
 
     await driver.findElement(By.linkText('Laden')).click()
     {
