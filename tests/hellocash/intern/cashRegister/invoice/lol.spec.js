@@ -1,8 +1,8 @@
-import defaultDriver from '../../../../../js/drivers.js'
+import { defaultDriver } from '#root/js/drivers.js'
 import { By } from 'selenium-webdriver'
-import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '../../../../../js/seleniumUtils.js'
-import { gotoBackoffice } from '../../../../../js/service/hellocash.js'
-import { describe, it, after, before } from 'mocha'
+import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '#root/js/seleniumUtils.js'
+import { gotoBackoffice } from '#root/js/service/hellocash.js'
+import Mocha from 'mocha'
 
 describe('cash-register/invoice', function () {
   let driver
@@ -13,7 +13,7 @@ describe('cash-register/invoice', function () {
   })
 
   after(async function () {
-    await (driver && driver.close() && driver.quit())
+    await (driver && driver.close())
   })
 
   it('creates an invoice with custom article', async function () {

@@ -1,23 +1,19 @@
-import defaultDriver from '../../../../../js/drivers.js'
+import { defaultDriver } from '#root/js/drivers.js'
 import { By } from 'selenium-webdriver'
-import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '../../../../../js/seleniumUtils.js'
-import { gotoBackoffice } from '../../../../../js/service/hellocash.js'
+import { findClick, setWindowSize, waitSeconds, waitUntilAppear } from '#root/js/seleniumUtils.js'
+import { gotoBackoffice } from '#root/js/service/hellocash.js'
 import Mocha from 'mocha'
 
 describe('cash-register/invoice', function () {
   let driver
 
   before(async function () {
-    try {
-      driver = await defaultDriver()
-      await gotoBackoffice(driver)
-    } catch (e) {
-      console.error(e)
-    }
+    driver = await defaultDriver()
+    await gotoBackoffice(driver)
   })
 
   after(async function () {
-    await (driver && driver.close() && driver.quit()) // quit
+    await (driver && driver.close())
   })
 
   it('creates an invoice', async function () {

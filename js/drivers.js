@@ -3,7 +3,7 @@ import seleniumChrome from 'selenium-webdriver/chrome.js'
 import chromedriver from 'chromedriver'
 import { envHeadless } from './utils.js'
 
-export default function defaultDriver() {
+export function defaultDriver() {
   return chrome()
 }
 
