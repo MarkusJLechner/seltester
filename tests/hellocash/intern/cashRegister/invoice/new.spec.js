@@ -9,8 +9,12 @@ describe('cash-register/invoice', function () {
   let driver
 
   before(async function () {
-    driver = await defaultDriver()
-    await gotoBackoffice(driver)
+    try {
+      driver = await defaultDriver()
+      await gotoBackoffice(driver)
+    } catch (e) {
+      console.error(e)
+    }
   })
 
   after(async function () {
