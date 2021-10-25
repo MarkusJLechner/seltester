@@ -5,7 +5,6 @@ import { gotoBackoffice } from '../../../../../js/service/hellocash.js'
 import Mocha from 'mocha'
 
 describe('cash-register/invoice', function () {
-  this.timeout(30000)
   let driver
 
   before(async function () {
@@ -18,7 +17,7 @@ describe('cash-register/invoice', function () {
   })
 
   after(async function () {
-    await (driver && driver.quit())
+    await (driver && driver.close()) // quit
   })
 
   it('creates an invoice', async function () {
