@@ -118,21 +118,18 @@ describe('cash-register/invoice', function () {
     await driver.findElement(By.name('remark')).sendKeys('test')
     await driver.findElement(By.css('#form-park-invoice .btn-primary > .block')).click()
     await driver.findElement(By.css('.btn-load-parked-invoice > img')).click()
-    await waitUntilAppear(
-      driver,
-      '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice'
-    )
-
     await waitUntilClickable(
       driver,
-      '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice'
+      '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice:nth-child(1)'
     )
 
-    await driver.findElement(By.linkText('Laden')).click()
-    {
-      const element = await driver.findElement(By.css('#tab-articles .hidden-sm'))
-      await driver.actions({ bridge: true }).move(element).perform()
-    }
+    await driver
+      .findElement(
+        By.css(
+          '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice:nth-child(1)'
+        )
+      )
+      .click()
     {
       const element = await driver.findElement(By.css('Body'))
       await driver.actions({ bridge: true }).move(element, 0, 0).perform()
