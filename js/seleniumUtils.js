@@ -4,17 +4,30 @@ export function findClick(driver, selector) {
   return driver.findElement(By.css(selector)).click()
 }
 
-export function waitUntilAppear(driver, selector, time = 10000) {
-  return driver.wait(until.elementLocated(By.css(selector)), time)
+export function waitUntilAppear(driver, selector, by = 'css', time = 10000) {
+  return driver.wait(until.elementLocated(By[by](selector)), time)
 }
 
-export function waitUntilClickable(driver, selector, time = 10000) {
-  const element = driver.wait(until.elementLocated(By.css(selector)), time)
+export async function waitAndClick(driver, selector, by = 'css', time = 10000) {
+  await waitUntilClickable(driver, selector, by, time)
+  return driver.findElement(By[by](selector)).click()
+}
+
+export function waitUntilClickable(driver, selector, by = 'css', time = 10000) {
+  const element = driver.wait(until.elementLocated(By[by](selector)), time)
   return driver.wait(until.elementIsVisible(element), time)
 }
 
 export function setWindowSize(driver, { width, height }) {
   return driver.manage().window().setRect({ width, height })
+}
+
+export function setWindowSizeDesktop(driver) {
+  return setWindowSize(driver, { width: 1920, height: 1080 })
+}
+
+export function setWindowSizeMobile(driver) {
+  return setWindowSize(driver, { width: 720, height: 1280 })
 }
 
 export function waitSeconds(driver, time) {
