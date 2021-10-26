@@ -21,9 +21,7 @@ describe('cash-register/invoice/search', function () {
   async function itCreatesInvoice() {
     await driver.get('https://testing.hellocash.business/intern/cash-register/invoice/new')
     await driver.manage().window().setRect({ width: 1452, height: 1050 })
-    await driver
-      .findElement(By.css('#tab-articles .container-products-category:nth-child(1) > .product:nth-child(1)'))
-      .click()
+    await waitAndClick(driver, '#tab-articles .container-products-category:nth-child(1) > .product:nth-child(1)')
     await driver.findElement(By.css('.btn-primary > img')).click()
     {
       const element = await driver.findElement(By.css('.btn-primary > img'))
