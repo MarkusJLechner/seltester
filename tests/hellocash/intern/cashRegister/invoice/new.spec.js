@@ -94,20 +94,15 @@ describe('cash-register/invoice', function () {
       await driver.actions({ bridge: true }).move(element, 0, 0).perform()
     }
     await driver.findElement(By.name('remark')).sendKeys('test')
-    await driver.findElement(By.css('#form-park-invoice .btn-primary > .block')).click()
-    await driver.findElement(By.css('.btn-load-parked-invoice > img')).click()
-    await waitUntilClickable(
+    await waitAndClick(driver, '#form-park-invoice > div.modal-footer > button.btn.btn-primary')
+    await waitAndClick(
+      driver,
+      '#page-wrapper > div.fh-billing > div > div.col-sm-6.col-md-7.col-lg-6.full-height.billing-left-panel > div.footer > div.h-scroll-container > div > button.btn.btn-link.btn-load-parked-invoice'
+    )
+    await waitAndClick(
       driver,
       '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice:nth-child(1)'
     )
-
-    await driver
-      .findElement(
-        By.css(
-          '#modal-parked-invoices > div > div > div.modal-body > div > table > tbody > tr:nth-child(1) > td.text-right > div > a.btn.btn-white.btn-sm.btn-get-parked-invoice:nth-child(1)'
-        )
-      )
-      .click()
     {
       const element = await driver.findElement(By.css('Body'))
       await driver.actions({ bridge: true }).move(element, 0, 0).perform()
